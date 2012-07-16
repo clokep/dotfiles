@@ -1,0 +1,1 @@
+LESS=-FRX;export LESS

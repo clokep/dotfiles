@@ -1,0 +1,32 @@
+[core]
+	autocrlf = false
+[user]
+	name = Patrick Cloke
+    email = clokep@gmail.com
+[color]
+	ui = auto
+[merge]
+	tool = kdiff3
+[mergetool "kdiff3"]
+	path = C:/Program Files/TortoiseHg/kdiff3.exe
+[diff]
+	guitool = kdiff3
+[difftool "kdiff3"]
+	path = C:/Program Files/TortoiseHg/kdiff3.exe
+[alias]
+# Log of changes on origin not yet on branch (aka hg incoming).
+	incoming = log HEAD..@{upstream}
+# Log of changes on branch not yet on branch (aka hg outgoing).
+	outgoing = log @{upstream}..HEAD
+	graph = log --pretty=oneline --abbrev-commit --decorate --graph
+	diffstat = diff --stat
+	staged = diff --cached
+	unstaged = diff
+	uadd = add --update
+# Amend with the same commit message.
+	fixup = git commit --amend -C HEAD
+# Print out aliases
+	alias = config --get-regexp alias
+# Print like hg rollback
+	rollback = reset --soft HEAD^
+	committers = shortlog -sne
