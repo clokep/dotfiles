@@ -1,0 +1,26 @@
+syntax: glob
+AppData/*
+Documents/*
+Downloads/*
+Favorites/*
+.bash_history
+.gitk
+.kdiff3rc
+.lesshst
+.subversion/*
+Contacts/*
+Desktop/*
+Links/*
+Music/*
+Videos/*
+Searches/*
+Tracing/*
+_viminfo
+Pictures/*
+PUTTY.RND
+wget-log*
+Saved Games/*
+*/.git*
+syntax: regexp
+.+\.(log|LOG).*
+(ntuser|NTUSER)\..+
