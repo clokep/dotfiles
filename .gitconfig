@@ -2,7 +2,7 @@
 	autocrlf = false
 [user]
 	name = Patrick Cloke
-    email = clokep@gmail.com
+	email = clokep@gmail.com
 [color]
 	ui = auto
 [merge]
@@ -24,9 +24,11 @@
 	unstaged = diff
 	uadd = add --update
 # Amend with the same commit message.
-	fixup = git commit --amend -C HEAD
+	fixup = commit --amend -C HEAD
 # Print out aliases
 	alias = config --get-regexp alias
 # Print like hg rollback
 	rollback = reset --soft HEAD^
 	committers = shortlog -sne
+# Import like hg import
+    import = apply --reject
