@@ -36,3 +36,4 @@ VirtualBox VMs/*
 syntax: regexp
 .+\.(log|LOG).*
 (ntuser|NTUSER)\..+
+.extra
