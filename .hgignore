@@ -21,6 +21,18 @@ PUTTY.RND
 wget-log*
 Saved Games/*
 */.git*
+workspace/*
+.forensics/*
+.dotmatrix*
+jwalk_cache/*
+.vagrant.d/*
+colordiff*
+VirtualBox VMs/*
+.VirtualBox/*
+.matplotlib/*
+.ssh/*
+.netbeans/*
+.zenmap/*
 syntax: regexp
 .+\.(log|LOG).*
 (ntuser|NTUSER)\..+
