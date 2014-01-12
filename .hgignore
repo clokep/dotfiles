@@ -33,6 +33,9 @@ VirtualBox VMs/*
 .ssh/*
 .netbeans/*
 .zenmap/*
+node_modules/*
+SkyDrive/*
+Thumbs.db
 syntax: regexp
 .+\.(log|LOG).*
 (ntuser|NTUSER)\..+

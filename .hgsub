@@ -1,2 +1,5 @@
-hgsubversion = https://bitbucket.org/durin42/hgsubversion/
 hg-git = https://bitbucket.org/durin42/hg-git
+hgbb = https://bitbucket.org/birkenfeld/hgbb
+hgsubversion = https://bitbucket.org/durin42/hgsubversion/
+mqext = https://bitbucket.org/sfink/mqext
+qimportbz = https://hg.mozilla.org/users/robarnold_cmu.edu/qimportbz/

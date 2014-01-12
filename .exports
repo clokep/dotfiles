@@ -1,7 +1,11 @@
 LESS=-FRX;
 export LESS
 
+# PATH=$PATH:$MSYS_MOZBUILD/llvm/bin:$MSYS_MOZBUILD/clang/bin
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:$PATH
+
+# For building Python modules to work on Windows.
+export VS90COMNTOOLS=/c/Program\ Files\ \(x86\)/Microsoft\ Visual\ Studio\ 10.0/Common7/Tools/
 
 # CLI Colors
 export CLICOLOR=1
