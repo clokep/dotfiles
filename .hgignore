@@ -36,6 +36,7 @@ VirtualBox VMs/*
 node_modules/*
 SkyDrive/*
 Thumbs.db
+.hgpasswords
 syntax: regexp
 .+\.(log|LOG).*
 (ntuser|NTUSER)\..+
