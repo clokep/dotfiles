@@ -1,1 +1,55 @@
-%include mercurial.ini
+[ui]
+username = Patrick Cloke <clokep@gmail.com>
+ssh = "C:\Program Files (x86)\PuTTY\plink.exe"
+
+[defaults]
+qrefresh = -UD
+qnew = -U
+import = --encoding utf-8
+
+[extensions]
+hgext.convert=
+hggit = ~/hg-git/hggit
+hgsubversion = ~/hgsubversion/hgsubversion
+purge =
+rebase =
+#tortoisehg.util.hgshelve=
+color =
+mq =
+mqext = ~/mqext
+transplant =
+churn =
+histedit = 
+pager =
+progress =
+hggit = ~/hg-git/hggit
+#bzexport = ~/bzexport
+qimportbz = ~/qimportbz
+hgbb = ~/hgbb/hgbb.py
+
+[color]
+mode = win32
+
+[mqext]
+mqcommit = auto
+
+[bzexport]
+username = clokep@gmail.com
+password =
+# URL of the Bugzilla server
+bugzilla = https://bugzilla.mozilla.org
+# URL of the corresponding BzAPI server
+api_server = https://api-dev.bugzilla.mozilla.org/latest/
+
+[diff]
+git = 1
+unified = 8
+
+[bb]
+username = clokep
+password =
+default_method = http
+
+[alias]
+show = log --patch --rev
+loc = !$HG blame -u $@ | cut -d : -f 1 | sed "s/^ *//" | sort | uniq -c | sort -r | awk "{lines[NR] = $0; names[NR] = $NF; sum += $0; } END {for (x = 1; x <= NR; x++) printf \"\t%5.2f%%\t%7d\t%s\n\", 100 * lines[x] / sum, lines[x], names[x] }"
