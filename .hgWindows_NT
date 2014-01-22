@@ -1,0 +1,4 @@
+# Windows specific configuration for Mercurial.
+
+[color]
+mode = win32

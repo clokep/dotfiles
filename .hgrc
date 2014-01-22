@@ -22,13 +22,9 @@ churn =
 histedit = 
 pager =
 progress =
-hggit = ~/hg-git/hggit
 #bzexport = ~/bzexport
 qimportbz = ~/qimportbz
 hgbb = ~/hgbb/hgbb.py
-
-[color]
-mode = win32
 
 [mqext]
 mqcommit = auto
@@ -54,3 +50,6 @@ loc = !$HG blame -u $@ | cut -d : -f 1 | sed "s/^ *//" | sort | uniq -c | sort -
 
 # Include passwords in a seperate file that will be ignored.
 %include .hgpasswords
+
+# Include OS specific things in a separate file.
+%include .hg$OS
