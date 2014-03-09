@@ -1,6 +1,5 @@
 [ui]
 username = Patrick Cloke <clokep@gmail.com>
-ssh = "C:\Program Files (x86)\PuTTY\plink.exe"
 
 [defaults]
 qrefresh = -UD
@@ -22,7 +21,8 @@ churn =
 histedit = 
 pager =
 progress =
-#bzexport = ~/bzexport
+record =
+bzexport = ~/bzexport
 qimportbz = ~/qimportbz
 hgbb = ~/hgbb/hgbb.py
 

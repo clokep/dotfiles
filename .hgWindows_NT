@@ -1,4 +1,6 @@
 # Windows specific configuration for Mercurial.
+[ui]
+ssh = "C:\Program Files (x86)\PuTTY\plink.exe"
 
 [color]
 mode = win32
