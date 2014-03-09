@@ -23,8 +23,8 @@ histedit =
 pager =
 progress =
 record =
-bzexport = ~/bzexport
-qimportbz = ~/qimportbz
+bzexport = ~/version-control-tools/hgext/bzexport
+qimportbz = ~/version-control-tools/hgext/qimportbz
 hgbb = ~/hgbb/hgbb.py
 
 [mqext]
