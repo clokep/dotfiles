@@ -1,3 +1,4 @@
+bzexport = https://hg.mozilla.org/users/tmielczarek_mozilla.com/bzexport
 hg-git = https://bitbucket.org/durin42/hg-git
 hgbb = https://bitbucket.org/birkenfeld/hgbb
 hgsubversion = https://bitbucket.org/durin42/hgsubversion/
