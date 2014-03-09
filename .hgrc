@@ -5,6 +5,7 @@ username = Patrick Cloke <clokep@gmail.com>
 qrefresh = -UD
 qnew = -U
 import = --encoding utf-8
+qimport = --encoding utf-8
 
 [extensions]
 hgext.convert=
