@@ -25,6 +25,7 @@ progress =
 record =
 bzexport = ~/version-control-tools/hgext/bzexport
 qimportbz = ~/version-control-tools/hgext/qimportbz
+mozext = ~/version-control-tools/hgext/mozext
 hgbb = ~/hgbb/hgbb.py
 
 [mqext]
@@ -36,6 +37,9 @@ username = clokep@gmail.com
 bugzilla = https://bugzilla.mozilla.org
 # URL of the corresponding BzAPI server
 api_server = https://api-dev.bugzilla.mozilla.org/latest/
+
+[mozext]
+ircnick = clokep
 
 [diff]
 git = 1
