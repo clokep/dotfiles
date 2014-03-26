@@ -36,8 +36,8 @@ alias xpcshell='mozilla/dist/bin/xpcshell.exe'
 # First check for mozilla/mach, then use mach.
 mach() {
     if [ -f mozilla/mach ]; then
-        ./mozilla/mach "$@"
+        mozilla/mach "$@"
     else
-        ./mach "$@"
+        mach "$@"
     fi
 }
