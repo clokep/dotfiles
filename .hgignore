@@ -28,6 +28,7 @@ percipient
 .ssh
 .subversion
 .vagrant.d
+.virtualenvs
 .zcompdump-*
 .viminfo
 .VirtualBox

@@ -1,3 +1,6 @@
+# Ensure this is sourced before any other configuration occurs.
+if [ -e "$HOME/.bash_profile" ]; then source $HOME/.bash_profile; fi
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -7,10 +10,6 @@ ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="robbyrussell"
 
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
@@ -19,9 +18,6 @@ ZSH_THEME="robbyrussell"
 
 # Uncomment to change how often before auto-updates occur? (in days)
 # export UPDATE_ZSH_DAYS=13
-
-# Uncomment following line if you want to disable colors in ls
-# DISABLE_LS_COLORS="true"
 
 # Uncomment following line if you want to disable autosetting terminal title.
 # DISABLE_AUTO_TITLE="true"
@@ -47,17 +43,5 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git python mercurial vagrant pip virtualenvwrapper celery django brew)
 
+# Load configuration from oh-my-zsh.
 source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
-# # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-if [ -e "$HOME/.bash_profile" ]; then source $HOME/.bash_profile; fi
-if [ -e "$HOME/.work-env" ]; then source $HOME/.work-env; fi
-
