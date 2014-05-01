@@ -9,3 +9,17 @@ export VS90COMNTOOLS=/c/Program\ Files\ \(x86\)/Microsoft\ Visual\ Studio\ 10.0/
 
 # CLI Colors
 export CLICOLOR=1
+
+unamestr=`uname`
+if [[ "$unamestr" == "MINGW32_NT-6.1" ]]; then
+    # Needed on Windows.
+    export GIT_SSH=/c/Program\ Files\ \(x86\)/PuTTY/plink.exe
+fi
+
+# History Control
+export HISTCONTROL=ignoredups
+export HISTCONTROL=ignoreboth
+export HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S '
+export HISTFILESIZE=2000
+export HISTIGNORE="[ ]*:&:bg:fg:exit" # Ignore some controlling instructions
+export PROMPT_COMMAND="history -a"
