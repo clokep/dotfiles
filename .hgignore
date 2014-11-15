@@ -1,43 +1,76 @@
 syntax: glob
-AppData/*
-Documents/*
-Downloads/*
-Favorites/*
+
+# This setup stuff.
+.extra
+.hgpasswords
+
+# Some generic stuff.
+*.diff
+*.orig
+mozilla
+percipient
+
+# UNIX stuff.
+*/.git*
+.*history
 .bash_history
+.config/hub
+.envs
+.erlang.cookie
+.gem
 .gitk
 .kdiff3rc
 .lesshst
-.subversion/*
-Contacts/*
-Desktop/*
-Links/*
-Music/*
-Videos/*
-Searches/*
-Tracing/*
-_viminfo
-Pictures/*
-PUTTY.RND
-wget-log*
-Saved Games/*
-*/.git*
-workspace/*
-.forensics/*
-.dotmatrix*
-jwalk_cache/*
-.vagrant.d/*
+.matplotlib
+.netbeans
+.oh-my-zsh
+.pip
+.ssh
+.subversion
+.vagrant.d
+.virtualenvs
+.zcompdump-*
+.viminfo
+.VirtualBox
+.zenmap
+.zsh-update
+.zshrc-e
 colordiff*
-VirtualBox VMs/*
-.VirtualBox/*
-.matplotlib/*
-.ssh/*
-.netbeans/*
-.zenmap/*
-node_modules/*
-SkyDrive/*
+jwalk_cache
+node_modules
+Tracing
+VirtualBox VMs
+wget-log*
+workspace
+_viminfo
+
+# Mac OS X stuff.
+.CFUserTextEncoding
+.DS_Store
+.Trash
+Library
+Movies
+Public
+
+# Windows stuff.
+.dotmatrix*
+.forensics
+AppData
+Contacts
+Desktop
+Documents
+Downloads
+Favorites
+Links
+Music
+Pictures
+PUTTY.RND
+Saved Games
+Searches
+SkyDrive
 Thumbs.db
-.hgpasswords
+Videos
+
 syntax: regexp
-.+\.(log|LOG).*
 (ntuser|NTUSER)\..+
-.extra
+.+\.(log|LOG).*
