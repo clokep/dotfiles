@@ -27,7 +27,6 @@ alias udiff='diff -u -U 8 -p'
 
 # Mozilla stuff.
 alias pymake='python -OO mozilla/build/pymake/make.py'
-alias mozmake='MOZCONFIG=$(pwd)/.mozconfig make'
 alias mozpymake='MOZCONFIG=$(pwd)/.mozconfig pymake'
 alias mozconfig='export MOZCONFIG=$(pwd)/.mozconfig'
 alias mozconfigure='MOZCONFIG=$(pwd)/.mozconfig configure'

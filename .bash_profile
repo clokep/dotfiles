@@ -13,7 +13,8 @@ export HISTFILESIZE=2000
 export HISTIGNORE="[ ]*:&:bg:fg:exit" # Ignore some controlling instructions
 #setopt -s histappend # Make bash append rather than overwrite the history on disk
 #setopt -s cmdhist # save multiple line commands to a single history line
-export PROMPT_COMMAND="history -a; history -c; history -r"
+#export PROMPT_COMMAND="history -a; history -c; history -r"
+export PROMPT_COMMAND='history -a'
 ################### End History Control ########################
 
 # Case-insensitive globbing (used in pathname expansion)
