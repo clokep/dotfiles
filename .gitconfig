@@ -24,8 +24,13 @@
 	staged = diff --cached
 	unstaged = diff
 	uadd = add --update
+# Commit even if pre-commit hooks fail.
+	reallycommit = commit --no-verify
 # Amend with the same commit message.
 	fixup = commit --amend -C HEAD
+	reallyfixup = commit --no-verify --amend -C HEAD
+# Push even if pre-push hooks fail.
+	reallypush = push --no-verify
 # Print out aliases
 	alias = config --get-regexp alias
 # Print like hg rollback
@@ -39,6 +44,12 @@
 # Count the number of lines by each author in a directory.
 	loc = !sh -c 'git ls-files -z --exclude-per-directory=.gitignore $0 | xargs -0 -n1 git blame --line-porcelain | sed -n \"s/^author //p\" | sort | uniq -c | sort -rn | awk \"{lines[NR] = $0; names[NR] = $NF; sum += $0; }\"'
 # cd back to the root of this git repository.
-#	root = !sh -c 'cd "$(git rev-parse --show-cdup)"'
+	root = !cd "`git rev-parse --show-cdup`" && pwd
 	git = !sh -c 'git $0'
 	mylog = log --author='Patrick Cloke'
+# Delete unused remote branches and their local copies.
+	trim = !sh -c "git remote prune $1 && git branch -r | cut -d ' ' -f 3 | egrep -v -f /dev/fd/0 <(git branch -vv | grep $1) | cut -d ' ' -f 3 | xargs git branch -d"
+# Delete branches merged into the current branch
+	localprune = "!git branch --merged | grep -v \"^\\*\" | xargs -n 1 git branch -d"
+[push]
+	default = simple
