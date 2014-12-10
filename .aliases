@@ -25,6 +25,8 @@ alias hg-responsible='hg blame -u . | grep -v '\'': binary file'\'' | cut -d : -
 # Unified diff.
 alias udiff='diff -u -U 8 -p'
 
+alias wingrep='/c/Program\ Files\ \(x86\)/GnuWin32/bin/grep.exe'
+
 # Mozilla stuff.
 alias pymake='python -OO mozilla/build/pymake/make.py'
 alias mozpymake='MOZCONFIG=$(pwd)/.mozconfig pymake'
