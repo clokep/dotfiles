@@ -71,6 +71,7 @@ SkyDrive
 Thumbs.db
 Videos
 
+.sonar/*
 syntax: regexp
 (ntuser|NTUSER)\..+
 .+\.(log|LOG).*
