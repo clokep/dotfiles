@@ -10,7 +10,7 @@ qimport = --encoding utf-8
 [extensions]
 hgext.convert = 
 #hggit = ~/hg-git/hggit
-hgsubversion = ~/hgsubversion/hgsubversion
+hgsubversion = ~/dotfiles/hgsubversion/hgsubversion
 purge = 
 rebase = 
 #tortoisehg.util.hgshelve=
@@ -25,8 +25,8 @@ progress =
 record = 
 bzexport = ~/.mozbuild/version-control-tools/hgext/bzexport
 qimportbz = ~/.mozbuild/version-control-tools/hgext/qimportbz
-#mozext = ~/version-control-tools/hgext/mozext
-hgbb = ~/hgbb/hgbb.py
+#mozext = ~/.mozbuild/version-control-tools/hgext/mozext
+hgbb = ~/dotfiles/hgbb/hgbb.py
 firefoxtree = ~/.mozbuild/version-control-tools/hgext/firefoxtree
 
 [mqext]

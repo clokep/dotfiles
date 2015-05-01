@@ -2,4 +2,4 @@ fe7ca4826e6eabe4449d62f09f1af9a09d50e834 .mozbuild/mercurial/extensions/mqext
 c111794ad63b36af1b0e12c5432b0f4f33471d3f .mozbuild/version-control-tools
 5e74edb7a62d726e9314d09a8ae48b0e3515d8f3 hg-git
 15ae319e069c7773726ca26516e46b8cb4084ec7 hgbb
-4cdb0e95604f657fb49acca19600c0b048eb6795 hgsubversion
+d9ba495af9197be1fb54c5de7525910245b2affe hgsubversion
