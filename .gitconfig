@@ -3,7 +3,7 @@
 	ignorecase = true
 [user]
 	name = Patrick Cloke
-	email = clokep@gmail.com
+	email = clokep@patrick.cloke.us
 [color]
 	ui = auto
 [merge]
@@ -51,5 +51,8 @@
 	trim = !sh -c "git remote prune $1 && git branch -r | cut -d ' ' -f 3 | egrep -v -f /dev/fd/0 <(git branch -vv | grep $1) | cut -d ' ' -f 3 | xargs git branch -d"
 # Delete branches merged into the current branch
 	localprune = "!git branch --merged | grep -v \"^\\*\" | xargs -n 1 git branch -d"
+# Some things I always try to type...
+	branches = branch -l
+	tags = tag -l
 [push]
 	default = simple

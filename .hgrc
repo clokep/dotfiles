@@ -1,6 +1,8 @@
 [ui]
 username = Patrick Cloke <clokep@gmail.com>
 merge=internal:merge
+# hgignore across all projects.
+ignore=~/.hgignoreglobal
 
 [defaults]
 qnew = -U
@@ -9,7 +11,7 @@ qimport = --encoding utf-8
 
 [extensions]
 hgext.convert = 
-#hggit = ~/hg-git/hggit
+#hggit = ~/dotfiles/hg-git/hggit
 hgsubversion = ~/dotfiles/hgsubversion/hgsubversion
 purge = 
 rebase = 
