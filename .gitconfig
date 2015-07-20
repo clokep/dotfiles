@@ -54,5 +54,8 @@
 # Some things I always try to type...
 	branches = branch -l
 	tags = tag -l
+# Squash all commits down to a single commit.
+    squash = "!f(){ CUR=`git rev-parse HEAD` && git reset --soft ${1} && git commit -m \"$(git log --format=%B ${1}..${CUR})\"; };f && git commit --amend"
+
 [push]
 	default = simple

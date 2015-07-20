@@ -4,18 +4,21 @@ alias cls='clear'
 
 alias git-root='cd "$(git rev-parse --show-cdup)"'
 
-alias colordiff='perl /bin/colordiff.pl'
-
 unamestr=`uname`
 if [[ "$unamestr" == "Darwin" ]]; then
     alias firefox=/Users/pcloke/ApplicationsFirefox.app/Contents/MacOS/firefox-bin
-    alias komodo="open -a '/Users/pcloke/Applications/Komodo IDE 9.app'"
+    alias komodo="open -a '/Applications/Komodo IDE 9.app'"
     alias instantbird=/Applications/Instantbird.app/Contents/MacOS/instantbird-bin
     alias rdp="open -a '/Applications/Microsoft Remote Desktop.app'"
+    alias keepass="mono ~/KeePass/KeePass.exe"
+
+    alias didit="~/didit-cli-client/didit.rb"
 elif [[ "$unamestr" == "MINGW32_NT-6.2" ]]; then
     alias firefox="/c/Program\ Files/Mozilla/Nightly/firefox.exe"
     alias komodo="/c/Program\ Files\ \(x86\)/ActiveState\ Komodo\ IDE\ 9/komodo.exe"
     alias instantbird="/c/Program Files (x86)/Instantbird/instantbird.exe"
+
+    alias colordiff='perl /bin/colordiff.pl'
 fi
 
 # Some version control stuff that doesn't work great as aliases.
@@ -42,3 +45,11 @@ mach() {
         mach "$@"
     fi
 }
+
+# Change DNS settings easily on Mac.
+alias setdns='networksetup -setdnsservers Wi-Fi'
+alias getdns='networksetup -getdnsservers Wi-Fi'
+
+# Find listening ports.
+alias uports='sudo lsof -n -i udp -P'
+alias tports='sudo lsof -n -i tcp -P -sTCP:LISTEN'
