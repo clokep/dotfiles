@@ -2,7 +2,7 @@
 username = Patrick Cloke <clokep@gmail.com>
 merge = internal:merge
 # hgignore across all projects.
-ignore = ~/.hgignoreglobal
+#ignore = ~/.hgignoreglobal
 
 [defaults]
 qnew = -U
