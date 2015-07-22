@@ -1,8 +1,8 @@
 [ui]
 username = Patrick Cloke <clokep@gmail.com>
-merge=internal:merge
+merge = internal:merge
 # hgignore across all projects.
-ignore=~/.hgignoreglobal
+ignore = ~/.hgignoreglobal
 
 [defaults]
 qnew = -U
@@ -18,7 +18,7 @@ rebase =
 #tortoisehg.util.hgshelve=
 color = 
 mq = 
-mqext = ~/.mozbuild/mercurial/extensions/mqext
+mqext = ~/.mozbuild/version-control-tools/hgext/mqext
 transplant = 
 churn = 
 histedit = 
@@ -31,6 +31,8 @@ qimportbz = ~/.mozbuild/version-control-tools/hgext/qimportbz
 hgbb = ~/dotfiles/hgbb/hgbb.py
 firefoxtree = ~/.mozbuild/version-control-tools/hgext/firefoxtree
 hgwatchman = ~/dotfiles/hgwatchman/hgwatchman
+bundleclone = ~/.mozbuild/version-control-tools/hgext/bundleclone
+push-to-try = ~/.mozbuild/version-control-tools/hgext/push-to-try
 
 [mqext]
 mqcommit = auto
