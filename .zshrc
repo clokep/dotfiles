@@ -41,7 +41,7 @@ ZSH_THEME="robbyrussell"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git python mercurial vagrant pip virtualenvwrapper celery django brew extract heroku fabric node npm)
+plugins=(git python mercurial vagrant pip virtualenvwrapper celery django brew extract heroku fabric node npm invoke)
 
 # Load configuration from oh-my-zsh.
 source $ZSH/oh-my-zsh.sh
