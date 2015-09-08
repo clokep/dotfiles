@@ -49,6 +49,7 @@ mach() {
 # Change DNS settings easily on Mac.
 alias setdns='networksetup -setdnsservers Wi-Fi'
 alias getdns='networksetup -getdnsservers Wi-Fi'
+alias getip='curl http://checkip.amazonaws.com'
 
 # Find listening ports.
 alias uports='sudo lsof -n -i udp -P'
