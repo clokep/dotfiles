@@ -42,7 +42,7 @@
 	modified = diff --diff-filter=MUB --ignore-space-at-eol --ignore-space-change --ignore-all-space
 	mstaged = diff --cached --diff-filter=MUB
 # Count the number of lines by each author in a directory.
-	loc = !sh -c 'git ls-files -z --exclude-per-directory=.gitignore $0 | xargs -0 -n1 git blame --line-porcelain | sed -n \"s/^author //p\" | sort | uniq -c | sort -rn | awk \"{lines[NR] = $0; names[NR] = $NF; sum += $0; }\"'
+	loc = !sh -c 'git ls-files -z --exclude-standard $0 | xargs -0 -n1 git blame --line-porcelain | sed -n \"s/^author //p\" | sort | uniq -c | sort -rn' #  | awk \"{ lines[NR] = $0; names[NR] = $NF; sum += $0; }\"
 # cd back to the root of this git repository.
 	root = !cd "`git rev-parse --show-cdup`" && pwd
 	git = !sh -c 'git $0'
