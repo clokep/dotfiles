@@ -12,6 +12,7 @@
 	path = C:/Program Files/TortoiseHg/kdiff3.exe
 [diff]
 	guitool = kdiff3
+	compactionHeuristic = true
 [difftool "kdiff3"]
 	path = C:/Program Files/TortoiseHg/kdiff3.exe
 [alias]
@@ -56,6 +57,12 @@
 	tags = tag -l
 # Squash all commits down to a single commit.
     squash = "!f(){ CUR=`git rev-parse HEAD` && git reset --soft ${1} && git commit -m \"$(git log --format=%B ${1}..${CUR})\"; };f && git commit --amend"
-
+# Find the oldest ancestor of the current branch shared with master.
+# See http://stackoverflow.com/questions/1527234/finding-a-branch-point-with-git
+	oldest-ancestor = !zsh -c 'diff --old-line-format= --new-line-format= <(git rev-list --first-parent \"${1:-master}\") <(git rev-list --first-parent \"${2:-HEAD}\") | head -1' -
+	branchdiff = !sh -c \"git diff `git oldest-ancestor`..\"
+	branchlog = !sh -c \"git log `git oldest-ancestor`..\"
+# Bisect the current branch using a command.
+	branchsect = "!f() { git bisect start HEAD `git oldest-ancestor`; git bisect run \"$@\"; }; f"
 [push]
 	default = simple

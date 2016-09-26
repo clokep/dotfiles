@@ -3,3 +3,5 @@ hgbb = https://bitbucket.org/seanfarley/hgbb
 hgsubversion = https://bitbucket.org/durin42/hgsubversion/
 .mozbuild/mercurial/extensions/mqext = https://bitbucket.org/sfink/mqext
 .mozbuild/version-control-tools = https://hg.mozilla.org/hgcustom/version-control-tools
+bookbinder = https://halbersa@bitbucket.org/halbersa/bookbinder
+hgwatchman = https://bitbucket.org/facebook/hgwatchman

@@ -12,13 +12,11 @@ qimport = --encoding utf-8
 [extensions]
 hgext.convert = 
 #hggit = ~/dotfiles/hg-git/hggit
-hgsubversion = ~/dotfiles/hgsubversion/hgsubversion
+#hgsubversion = ~/dotfiles/hgsubversion/hgsubversion
 purge = 
 rebase = 
-#tortoisehg.util.hgshelve=
 color = 
 mq = 
-mqext = ~/.mozbuild/version-control-tools/hgext/mqext
 transplant = 
 churn = 
 histedit = 
@@ -27,12 +25,14 @@ progress =
 record = 
 bzexport = ~/.mozbuild/version-control-tools/hgext/bzexport
 qimportbz = ~/.mozbuild/version-control-tools/hgext/qimportbz
-#mozext = ~/.mozbuild/version-control-tools/hgext/mozext
-hgbb = ~/dotfiles/hgbb/hgbb.py
+# Seems broken with newer Mercurials.
+#hgbb = ~/dotfiles/hgbb/hgbb.py
 firefoxtree = ~/.mozbuild/version-control-tools/hgext/firefoxtree
-hgwatchman = ~/dotfiles/hgwatchman/hgwatchman
 bundleclone = ~/.mozbuild/version-control-tools/hgext/bundleclone
-push-to-try = ~/.mozbuild/version-control-tools/hgext/push-to-try
+#push-to-try = ~/.mozbuild/version-control-tools/hgext/push-to-try
+bookbinder = ~/dotfiles/bookbinder
+fsmonitor = 
+blackbox = 
 
 [mqext]
 mqcommit = auto
@@ -62,14 +62,21 @@ default_method = https
 [alias]
 show = log --patch --rev
 qexport = !hg qapplied | xargs -I@ hg export @ -o @.diff
-
-[hostfingerprints]
-bugzilla.mozilla.org = 47:13:a2:14:0c:46:45:53:12:0d:e5:36:16:a5:60:26:3e:da:3a:60
-bitbucket.org = 46:de:34:e7:9b:18:cd:7f:ae:fd:8b:e3:bc:f4:1a:5e:38:d7:ac:24
-hg.mozilla.org = af:27:b9:34:47:4e:e5:98:01:f6:83:2b:51:c9:aa:d8:df:fb:1a:27
+# See https://sny.no/2015/10/bookbinder
+blog = log --rev 'feature(tip)'
 
 [bugzilla]
 username = clokep@gmail.com
+
+[pager]
+pager = LESS=FRSXQ less
+attend-help = true
+attend-incoming = true
+attend-outgoing = true
+attend-status = true
+
+[hostsecurity]
+bugzilla.mozilla.org:fingerprints = sha256:10:95:a8:c1:e1:c3:18:fa:e4:95:40:99:11:07:6d:e3:79:ab:e5:b0:29:50:ff:40:e8:e8:63:c4:fd:f3:9f:cb
 
 # Include passwords in a seperate file that will be ignored.
 %include .hgpasswords
