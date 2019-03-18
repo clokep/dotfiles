@@ -3,6 +3,8 @@ username = Patrick Cloke <clokep@gmail.com>
 merge = internal:merge
 # hgignore across all projects.
 ignore = ~/.hgignoreglobal
+tweakdefaults = true
+interface = curses
 
 [defaults]
 qnew = -U
@@ -15,24 +17,22 @@ hgext.convert =
 #hgsubversion = ~/dotfiles/hgsubversion/hgsubversion
 purge = 
 rebase = 
-color = 
 mq = 
 transplant = 
 churn = 
 histedit = 
-pager = 
 progress = 
 record = 
 bzexport = ~/.mozbuild/version-control-tools/hgext/bzexport
 qimportbz = ~/.mozbuild/version-control-tools/hgext/qimportbz
 # Seems broken with newer Mercurials.
 #hgbb = ~/dotfiles/hgbb/hgbb.py
-firefoxtree = ~/.mozbuild/version-control-tools/hgext/firefoxtree
-bundleclone = ~/.mozbuild/version-control-tools/hgext/bundleclone
-#push-to-try = ~/.mozbuild/version-control-tools/hgext/push-to-try
+#firefoxtree = ~/.mozbuild/version-control-tools/hgext/firefoxtree
+push-to-try = ~/.mozbuild/version-control-tools/hgext/push-to-try
 bookbinder = ~/dotfiles/bookbinder
 fsmonitor = 
 blackbox = 
+evolve = ~/.mozbuild/evolve/hgext3rd/evolve
 
 [mqext]
 mqcommit = auto
@@ -64,22 +64,36 @@ show = log --patch --rev
 qexport = !hg qapplied | xargs -I@ hg export @ -o @.diff
 # See https://sny.no/2015/10/bookbinder
 blog = log --rev 'feature(tip)'
+wip = log --graph --rev=wip --template=wip
 
 [bugzilla]
 username = clokep@gmail.com
 
 [pager]
 pager = LESS=FRSXQ less
-attend-help = true
-attend-incoming = true
-attend-outgoing = true
-attend-status = true
 
 [hostsecurity]
-bugzilla.mozilla.org:fingerprints = sha256:10:95:a8:c1:e1:c3:18:fa:e4:95:40:99:11:07:6d:e3:79:ab:e5:b0:29:50:ff:40:e8:e8:63:c4:fd:f3:9f:cb
+bugzilla.mozilla.org:fingerprints = sha256:95:BA:0F:F2:C4:28:75:9D:B5:DB:4A:50:5F:29:46:A3:A9:4E:1B:56:A5:AE:10:50:C3:DD:3A:AC:73:BF:4A:D9
+[revsetalias]
+wip = (parents(not public()) or not public() or . or (head() and branch(default))) and (not obsolete() or orphan()^) and not closed()
+[templates]
+wip = '{label("wip.branch", if(branches,"{branches} "))}{label(ifeq(graphnode,"x","wip.obsolete","wip.{phase}"),"{rev}:{node|short}")}{label("wip.user", " {author|user}")}{label("wip.tags", if(tags," {tags}"))}{label("wip.tags", if(fxheads," {fxheads}"))}{if(bookmarks," ")}{label("wip.bookmarks", if(bookmarks,bookmarks))}{label(ifcontains(rev, revset("parents()"), "wip.here"), " {desc|firstline}")}'
+[color]
+wip.bookmarks = yellow underline
+wip.branch = yellow
+wip.draft = green
+wip.here = red
+wip.obsolete = none
+wip.public = blue
+wip.tags = yellow
+wip.user = magenta
+[experimental]
+graphshorten = true
+[mozilla]
+ircnick = clokep
 
-# Include passwords in a seperate file that will be ignored.
-%include .hgpasswords
+# Include passwords in a separate file that will be ignored.
+# %include .hgpasswords
 
 # Include OS specific things in a separate file.
-%include .hg$OS
+# %include .hg$OS

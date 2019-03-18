@@ -2,7 +2,7 @@ LESS=-FRX;
 export LESS
 
 # PATH=$PATH:$MSYS_MOZBUILD/llvm/bin:$MSYS_MOZBUILD/clang/bin
-export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:$PATH
+export PATH=$(brew --prefix)/opt/python@2/libexec/bin:$(brew --prefix)/opt/curl/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:$HOME/.cargo/bin:$HOME/.local/bin:$PATH:$PATH
 
 # For building Python modules to work on Windows.
 export VS90COMNTOOLS=/c/Program\ Files\ \(x86\)/Microsoft\ Visual\ Studio\ 10.0/Common7/Tools/

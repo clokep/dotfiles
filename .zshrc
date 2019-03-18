@@ -40,8 +40,10 @@ ZSH_THEME="robbyrussell"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git python mercurial vagrant pip virtualenvwrapper celery django brew extract heroku fabric node npm invoke)
+
+# Add aws-keychain autocompletions.
+#ln ~/dotfiles/aws-keychain-completion.zsh /usr/local/share/zsh/site-functions/_aws-keychain
 
 # Load configuration from oh-my-zsh.
 source $ZSH/oh-my-zsh.sh
@@ -52,3 +54,9 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # Ensure this is sourced after other configuration occurs in case ZSH overrides
 # configuration.
 if [ -e "$HOME/.bash_profile" ]; then source $HOME/.bash_profile; fi
+
+# added by pipsi (https://github.com/mitsuhiko/pipsi)
+export PATH="/Users/pcloke/.local/bin:$PATH"
+
+# added by pipsi (https://github.com/mitsuhiko/pipsi)
+export PATH="/Users/pcloke/.local/bin:$PATH"

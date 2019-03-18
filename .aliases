@@ -7,13 +7,13 @@ alias git-root='cd "$(git rev-parse --show-cdup)"'
 unamestr=`uname`
 if [[ "$unamestr" == "Darwin" ]]; then
     alias firefox=/Users/pcloke/ApplicationsFirefox.app/Contents/MacOS/firefox-bin
-    alias komodo="open -a '/Applications/Komodo IDE 10.app'"
+    alias komodo="open -a '/Applications/Komodo IDE 11.app'"
     alias instantbird=/Applications/Instantbird.app/Contents/MacOS/instantbird-bin
     alias rdp="open -a '/Applications/Microsoft Remote Desktop.app'"
     alias keepass="mono ~/KeePass/KeePass.exe"
 elif [[ "$unamestr" == "MINGW32_NT-6.2" ]]; then
     alias firefox="/c/Program\ Files/Mozilla/Nightly/firefox.exe"
-    alias komodo="/c/Program\ Files\ \(x86\)/ActiveState\ Komodo\ IDE\ 10/komodo.exe"
+    alias komodo="/c/Program\ Files\ \(x86\)/ActiveState\ Komodo\ IDE\ 11/komodo.exe"
     alias instantbird="/c/Program Files (x86)/Instantbird/instantbird.exe"
 
     alias colordiff='perl /bin/colordiff.pl'
@@ -43,23 +43,11 @@ alias wingrep='/c/Program\ Files\ \(x86\)/GnuWin32/bin/grep.exe'
 #}
 
 # Mozilla stuff.
-alias pymake='python -OO mozilla/build/pymake/make.py'
-alias mozpymake='MOZCONFIG=$(pwd)/.mozconfig pymake'
-alias mozconfig='export MOZCONFIG=$(pwd)/.mozconfig'
-alias mozconfigure='MOZCONFIG=$(pwd)/.mozconfig configure'
-alias xpcshell='mozilla/dist/bin/xpcshell.exe'
-
-# First check for mozilla/mach, then use mach.
-mach() {
-    if [ -f mozilla/mach ]; then
-        mozilla/mach "$@"
-    else
-        mach "$@"
-    fi
-}
+alias xpcshell='dist/bin/xpcshell.exe'
 
 # Change DNS settings easily on Mac.
 alias setdns='networksetup -setdnsservers Wi-Fi'
+alias resetdns='networksetup -setdnsservers Wi-Fi empty'
 alias getdns='networksetup -getdnsservers Wi-Fi'
 alias getip='curl https://whatismyaddress.herokuapp.com/'
 alias randommac='sudo spoof randomize en0'
@@ -68,3 +56,7 @@ alias resetmac='sudo spoof reset en0'
 # Find listening ports.
 alias uports='sudo lsof -n -i udp -P'
 alias tports='sudo lsof -n -i tcp -P -sTCP:LISTEN'
+
+# Fun.
+alias moon='curl http://wttr.in/Moon'
+alias weather='curl http://wttr.in'

@@ -1,6 +1,7 @@
 [core]
 	autocrlf = false
 	ignorecase = true
+	pager = /usr/local/share/git-core/contrib/diff-highlight/diff-highlight | less
 [user]
 	name = Patrick Cloke
 	email = clokep@patrick.cloke.us
@@ -42,8 +43,6 @@
 # Show a diff of only (real?) modified files
 	modified = diff --diff-filter=MUB --ignore-space-at-eol --ignore-space-change --ignore-all-space
 	mstaged = diff --cached --diff-filter=MUB
-# Count the number of lines by each author in a directory.
-	loc = !sh -c 'git ls-files -z --exclude-standard $0 | xargs -0 -n1 git blame --line-porcelain | sed -n \"s/^author //p\" | sort | uniq -c | sort -rn' #  | awk \"{ lines[NR] = $0; names[NR] = $NF; sum += $0; }\"
 # cd back to the root of this git repository.
 	root = !cd "`git rev-parse --show-cdup`" && pwd
 	git = !sh -c 'git $0'
@@ -51,7 +50,7 @@
 # Delete unused remote branches and their local copies.
 	trim = !sh -c "git remote prune $1 && git branch -r | cut -d ' ' -f 3 | egrep -v -f /dev/fd/0 <(git branch -vv | grep $1) | cut -d ' ' -f 3 | xargs git branch -d"
 # Delete branches merged into the current branch
-	localprune = "!git branch --merged | grep -v \"^\\*\" | xargs -n 1 git branch -d"
+	localprune = "!git branch --merged master | grep -v master | xargs git branch -d"
 # Some things I always try to type...
 	branches = branch -l
 	tags = tag -l
@@ -60,9 +59,17 @@
 # Find the oldest ancestor of the current branch shared with master.
 # See http://stackoverflow.com/questions/1527234/finding-a-branch-point-with-git
 	oldest-ancestor = !zsh -c 'diff --old-line-format= --new-line-format= <(git rev-list --first-parent \"${1:-master}\") <(git rev-list --first-parent \"${2:-HEAD}\") | head -1' -
-	branchdiff = !sh -c \"git diff `git oldest-ancestor`..\"
-	branchlog = !sh -c \"git log `git oldest-ancestor`..\"
+	branchdiff = !sh -c \"git diff `git oldest-ancestor`..HEAD $@\"
+	branchlog = !sh -c \"git log `git oldest-ancestor`..HEAD $@\"
+	branchbase = !sh -c \"git rebase -i `git oldest-ancestor`\"
 # Bisect the current branch using a command.
 	branchsect = "!f() { git bisect start HEAD `git oldest-ancestor`; git bisect run \"$@\"; }; f"
 [push]
 	default = simple
+[interactive]
+	diffFilter = diff-highlight
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
