@@ -2,6 +2,5 @@
 fcd885cc3d1af5a666942e98f1a7d85eb8d2414f .mozbuild/version-control-tools
 47edc502558a51029b26f5c837b3a05129ac551d bookbinder
 70c9dfdb0bc1091b436f2ac6b5458cc10af7a52e hg-git
-15ae319e069c7773726ca26516e46b8cb4084ec7 hgbb
 f44543ffab9b8f3faf125712d0ca907ac7cbe547 hgsubversion
 0f36dcc300b9f52e129f08b30d305e6e69a12141 hgwatchman
