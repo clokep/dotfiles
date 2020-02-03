@@ -23,16 +23,15 @@ churn =
 histedit = 
 progress = 
 record = 
-bzexport = ~/.mozbuild/version-control-tools/hgext/bzexport
-qimportbz = ~/.mozbuild/version-control-tools/hgext/qimportbz
 # Seems broken with newer Mercurials.
 #hgbb = ~/dotfiles/hgbb/hgbb.py
 #firefoxtree = ~/.mozbuild/version-control-tools/hgext/firefoxtree
 push-to-try = ~/.mozbuild/version-control-tools/hgext/push-to-try
-bookbinder = ~/dotfiles/bookbinder
-fsmonitor = 
+#bookbinder = ~/dotfiles/bookbinder
+#fsmonitor = 
 blackbox = 
-evolve = ~/.mozbuild/evolve/hgext3rd/evolve
+#evolve =
+absorb = 
 
 [mqext]
 mqcommit = auto
@@ -65,6 +64,7 @@ qexport = !hg qapplied | xargs -I@ hg export @ -o @.diff
 # See https://sny.no/2015/10/bookbinder
 blog = log --rev 'feature(tip)'
 wip = log --graph --rev=wip --template=wip
+smart-annotate = annotate -w --skip ignored_changesets
 
 [bugzilla]
 username = clokep@gmail.com
@@ -76,6 +76,7 @@ pager = LESS=FRSXQ less
 bugzilla.mozilla.org:fingerprints = sha256:95:BA:0F:F2:C4:28:75:9D:B5:DB:4A:50:5F:29:46:A3:A9:4E:1B:56:A5:AE:10:50:C3:DD:3A:AC:73:BF:4A:D9
 [revsetalias]
 wip = (parents(not public()) or not public() or . or (head() and branch(default))) and (not obsolete() or orphan()^) and not closed()
+ignored_changesets = desc("ignore-this-changeset") or extdata(get_ignored_changesets)
 [templates]
 wip = '{label("wip.branch", if(branches,"{branches} "))}{label(ifeq(graphnode,"x","wip.obsolete","wip.{phase}"),"{rev}:{node|short}")}{label("wip.user", " {author|user}")}{label("wip.tags", if(tags," {tags}"))}{label("wip.tags", if(fxheads," {fxheads}"))}{if(bookmarks," ")}{label("wip.bookmarks", if(bookmarks,bookmarks))}{label(ifcontains(rev, revset("parents()"), "wip.here"), " {desc|firstline}")}'
 [color]
@@ -91,6 +92,8 @@ wip.user = magenta
 graphshorten = true
 [mozilla]
 ircnick = clokep
+[extdata]
+get_ignored_changesets = shell:cat `hg root`/.hg-annotate-ignore-revs 2> /dev/null || true
 
 # Include passwords in a separate file that will be ignored.
 # %include .hgpasswords
