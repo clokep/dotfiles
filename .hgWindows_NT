@@ -1,9 +1,0 @@
-# Windows specific configuration for Mercurial.
-[ui]
-ssh = "C:\Program Files (x86)\PuTTY\plink.exe"
-
-[color]
-mode = win32
-
-[alias]
-loc = !hg blame -u $@ | cut -d : -f 1 | sed "s/^ *//" | sort | uniq -c | sort -r | gawk "{lines[NR] = $0; names[NR] = $NF; sum += $0; } END {for (x = 1; x <= NR; x++) printf \"\t%5.2f%%\t%7d\t%s\n\", 100 * lines[x] / sum, lines[x], names[x] }"

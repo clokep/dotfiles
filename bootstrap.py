@@ -5,7 +5,7 @@ import os
 import sys
 
 # Global - add files you want to ignore in the current directory
-IGNORED_FILES = [".hgignore", "bootstrap.py", "README.md", "LICENSE"]
+IGNORED_FILES = [".gitignore", "bootstrap.py", "README.md", "LICENSE"]
 
 if __name__ == "__main__":
     """
