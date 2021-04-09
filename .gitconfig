@@ -5,17 +5,11 @@
 [user]
 	name = Patrick Cloke
 	email = clokep@patrick.cloke.us
+	signingkey = 33FC58F6A7113048
 [color]
 	ui = auto
-[merge]
-	tool = kdiff3
-[mergetool "kdiff3"]
-	path = C:/Program Files/TortoiseHg/kdiff3.exe
 [diff]
-	guitool = kdiff3
 	compactionHeuristic = true
-[difftool "kdiff3"]
-	path = C:/Program Files/TortoiseHg/kdiff3.exe
 [alias]
 # Log of changes on origin not yet on branch (aka hg incoming).
 	incoming = log HEAD..@{upstream}
@@ -64,14 +58,13 @@
 	branchbase = !sh -c \"git rebase -i `git oldest-ancestor`\"
 # Bisect the current branch using a command.
 	branchsect = "!f() { git bisect start HEAD `git oldest-ancestor`; git bisect run \"$@\"; }; f"
+# Make a commit with a hard-coded message.
+	news = commit -m Newsfragment
 [push]
 	default = simple
 [interactive]
-	diffFilter = diff-highlight
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+	diffFilter = /usr/local/share/git-core/contrib/diff-highlight/diff-highlight
 [log]
 	mailmap = true
+[pull]
+	rebase = false
