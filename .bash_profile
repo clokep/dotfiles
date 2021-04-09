@@ -6,3 +6,5 @@ file="$HOME/.$file"
 done
 
 export PROMPT_COMMAND='history -a'
+
+export PATH="$HOME/.cargo/bin:$PATH"

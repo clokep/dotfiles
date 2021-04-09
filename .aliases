@@ -1,23 +1,4 @@
-# Because I'm used to using Windows / MATLAB.
-alias clc='clear'
-alias cls='clear'
-
 alias git-root='cd "$(git rev-parse --show-cdup)"'
-
-unamestr=`uname`
-if [[ "$unamestr" == "Darwin" ]]; then
-    alias firefox=/Users/pcloke/ApplicationsFirefox.app/Contents/MacOS/firefox-bin
-    alias komodo="open -a '/Applications/Komodo IDE 11.app'"
-    alias instantbird=/Applications/Instantbird.app/Contents/MacOS/instantbird-bin
-    alias rdp="open -a '/Applications/Microsoft Remote Desktop.app'"
-    alias keepass="mono ~/KeePass/KeePass.exe"
-elif [[ "$unamestr" == "MINGW32_NT-6.2" ]]; then
-    alias firefox="/c/Program\ Files/Mozilla/Nightly/firefox.exe"
-    alias komodo="/c/Program\ Files\ \(x86\)/ActiveState\ Komodo\ IDE\ 11/komodo.exe"
-    alias instantbird="/c/Program Files (x86)/Instantbird/instantbird.exe"
-
-    alias colordiff='perl /bin/colordiff.pl'
-fi
 
 # Some version control stuff that doesn't work great as aliases.
 alias git-root='cd "$(git rev-parse --show-cdup)"'
@@ -27,23 +8,6 @@ alias hg-responsible='hg blame -u . | grep -v '\'': binary file'\'' | cut -d : -
 alias udiff='diff -u -U 8 -p'
 # Randomize lines in a file.
 alias randlines="perl -MList::Util -e 'print List::Util::shuffle <>'"
-
-alias wingrep='/c/Program\ Files\ \(x86\)/GnuWin32/bin/grep.exe'
-
-# Muscle memory...
-#fab () {
-#    # If invoke is found use that instead...
-#    hash invoke &> /dev/null
-#    if [ $? -eq 0 ]; then
-#        invoke "$@"
-#        echo "DONE"
-#    else
-#        fab "$@"
-#    fi
-#}
-
-# Mozilla stuff.
-alias xpcshell='dist/bin/xpcshell.exe'
 
 # Change DNS settings easily on Mac.
 alias setdns='networksetup -setdnsservers Wi-Fi'
