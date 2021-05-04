@@ -8,3 +8,7 @@
 
 # Mozilla mach setup.
 .mozbuild/mercurial/setup.lastcheck
+
+# Editors
+.idea/
+

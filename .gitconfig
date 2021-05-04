@@ -68,3 +68,8 @@
 	mailmap = true
 [pull]
 	rebase = false
+[init]
+	defaultBranch = main
+[includeIf "gitdir:~/matrix/"]
+	path = ~/.gitconfig-element
+
