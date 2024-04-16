@@ -13,29 +13,28 @@ if __name__ == "__main__":
     files into your home directory
     """
 
-    currentDirectory = os.getcwd()
+    current_directory = os.getcwd()
     home = os.getenv("HOME")
 
-    if not currentDirectory.endswith("dotfiles"):
-        print "Are you running this outside of the dotfiles directory?"
+    if not current_directory.endswith("dotfiles"):
+        print("Are you running this outside of the dotfiles directory?")
         sys.exit(1)
 
     else:
-        dotfiles  = os.listdir(currentDirectory)
+        dotfiles  = os.listdir(current_directory)
 
         for f in dotfiles:
             if f.endswith("~") or os.path.isdir(f) or (f in IGNORED_FILES):
-                print "Ignoring temp file or directory: %s" % f
+                print(f"Ignoring temp file or directory: {f}")
                 continue
             
             elif f.startswith("."):
-                original = currentDirectory + "/" + f
-                homeFile = home + "/" + f
-                print "Linking: %s --> %s" % (original, homeFile)
-                os.system("ln -si %s %s" % (original, homeFile))
+                original = current_directory + "/" + f
+                home_file = home + "/" + f
+                print(f"Linking: {original} --> {home_file}")
+                os.system(f"ln -si {original} {home_file}")
 
             else:
-                print "We encountered some weird file and are ignoring it"
+                print("We encountered some weird file and are ignoring it")
 
-    print "Done linking..."
-
+    print("Done linking...")
