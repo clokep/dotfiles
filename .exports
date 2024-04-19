@@ -1,4 +1,4 @@
-# Fix less to work with formatting.
+# Configure less to work with colors.
 LESS=-FRX;
 export LESS
 
@@ -27,3 +27,6 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init --path)"
 eval "$(pyenv virtualenv-init -)"
+
+# Opt-out of analytics.
+export HOMEBREW_NO_ANALYTICS=1
