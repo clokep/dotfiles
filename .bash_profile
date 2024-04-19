@@ -4,7 +4,3 @@ for file in exports aliases extra; do
 file="$HOME/.$file"
   [ -e "$file" ] && source "$file"
 done
-
-export PROMPT_COMMAND='history -a'
-
-export PATH="$HOME/.cargo/bin:$PATH"
