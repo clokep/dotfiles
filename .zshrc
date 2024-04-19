@@ -1,6 +1,10 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# Ensure this is sourced after other configuration occurs in case ZSH overrides
+# configuration.
+if [ -e "$HOME/.bash_profile" ]; then source $HOME/.bash_profile; fi
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -68,7 +72,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git python mercurial pip pyenv extract node npm zsh-syntax-highlighting)
+plugins=(git python mercurial pip pyenv extract node npm zsh-syntax-highlighting bgnotify yarn)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -97,7 +101,3 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# Ensure this is sourced after other configuration occurs in case ZSH overrides
-# configuration.
-if [ -e "$HOME/.bash_profile" ]; then source $HOME/.bash_profile; fi

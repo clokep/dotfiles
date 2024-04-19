@@ -1,7 +1,6 @@
 [core]
 	autocrlf = false
 	ignorecase = true
-	pager = /usr/local/share/git-core/contrib/diff-highlight/diff-highlight | less
 [user]
 	name = Patrick Cloke
 	email = clokep@patrick.cloke.us
@@ -44,7 +43,8 @@
 # Delete unused remote branches and their local copies.
 	trim = !sh -c "git remote prune $1 && git branch -r | cut -d ' ' -f 3 | egrep -v -f /dev/fd/0 <(git branch -vv | grep $1) | cut -d ' ' -f 3 | xargs git branch -d"
 # Delete branches merged into the current branch
-	localprune = "!git branch --merged master | grep -v master | xargs git branch -d"
+	localprune = !git for-each-ref --format '%(refname:short) %(upstream:track)' refs/heads | awk '$2 == \"[gone]\" {print $1}' | xargs git branch --delete --force
+
 # Some things I always try to type...
 	branches = branch -l
 	tags = tag -l
@@ -62,14 +62,13 @@
 	news = commit -m Newsfragment
 [push]
 	default = simple
-[interactive]
-	diffFilter = /usr/local/share/git-core/contrib/diff-highlight/diff-highlight
 [log]
 	mailmap = true
 [pull]
 	rebase = false
 [init]
 	defaultBranch = main
-[includeIf "gitdir:~/matrix/"]
-	path = ~/.gitconfig-element
-
+[rerere]
+	enabled = true
+[help]
+	autocorrect = prompt
