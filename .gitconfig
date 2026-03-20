@@ -50,9 +50,9 @@
 	tags = tag -l
 # Squash all commits down to a single commit.
     squash = "!f(){ CUR=`git rev-parse HEAD` && git reset --soft ${1} && git commit -m \"$(git log --format=%B ${1}..${CUR})\"; };f && git commit --amend"
-# Find the oldest ancestor of the current branch shared with master.
+# Find the oldest ancestor of the current branch shared with main.
 # See http://stackoverflow.com/questions/1527234/finding-a-branch-point-with-git
-	oldest-ancestor = !zsh -c 'diff --old-line-format= --new-line-format= <(git rev-list --first-parent \"${1:-master}\") <(git rev-list --first-parent \"${2:-HEAD}\") | head -1' -
+	oldest-ancestor = !zsh -c 'diff -u <(git rev-list --first-parent "${1:-main}") <(git rev-list --first-parent "${2:-HEAD}") | sed -ne \"s/^ //p\" | head -1' -
 	branchdiff = !sh -c \"git diff `git oldest-ancestor`..HEAD $@\"
 	branchlog = !sh -c \"git log `git oldest-ancestor`..HEAD $@\"
 	branchbase = !sh -c \"git rebase -i `git oldest-ancestor`\"
