@@ -28,3 +28,16 @@ function c() {
     claude "/rename $name"
   fi
 }
+
+# Function to list all known Claude sessions for a path
+function claude-sessions() {
+  local encoded=$(pwd | sed 's|[^a-zA-Z0-9]|-|g')
+  local sessions_dir="$HOME/.claude/projects/$encoded"
+
+  for jsonl in "$sessions_dir"/*.jsonl; do
+    local title=$(grep '"type":"custom-title"' "$jsonl" | tail -1 | jq -r '.customTitle')
+    if [[ "$title" != "" ]]; then
+      echo $title
+    fi
+  done
+}
