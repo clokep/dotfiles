@@ -14,13 +14,15 @@ function c() {
   local sessions_dir="$HOME/.claude/projects/$encoded"
   local found=false
 
-  for jsonl in "$sessions_dir"/*.jsonl; do
-    local last_title=$(grep '"type":"custom-title"' "$jsonl" | tail -1 | jq -r '.customTitle')
-    if [[ "$last_title" == "$name" ]]; then
-      found=true
-      break
-    fi
-  done
+  if [ -f "$sessions_dir" ]; then
+    for jsonl in "$sessions_dir"/*.jsonl; do
+      local last_title=$(grep '"type":"custom-title"' "$jsonl" | tail -1 | jq -r '.customTitle')
+      if [[ "$last_title" == "$name" ]]; then
+        found=true
+        break
+      fi
+    done
+  fi
 
   if $found; then
     claude --resume "$name"
@@ -34,10 +36,12 @@ function claude-sessions() {
   local encoded=$(pwd | sed 's|[^a-zA-Z0-9]|-|g')
   local sessions_dir="$HOME/.claude/projects/$encoded"
 
-  for jsonl in "$sessions_dir"/*.jsonl; do
-    local title=$(grep '"type":"custom-title"' "$jsonl" | tail -1 | jq -r '.customTitle')
-    if [[ "$title" != "" ]]; then
-      echo $title
-    fi
-  done
+  if [ -f "$sessions_dir" ]; then
+    for jsonl in "$sessions_dir"/*.jsonl; do
+      local title=$(grep '"type":"custom-title"' "$jsonl" | tail -1 | jq -r '.customTitle')
+      if [[ "$title" != "" ]]; then
+        echo $title
+      fi
+    done
+  fi
 }
