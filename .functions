@@ -1,0 +1,30 @@
+# Wrapper function to launch Claude and either create a new session for the branch
+# or resume a past session based on the branch name
+#
+# From https://gist.github.com/rcscott/e6e9005f39e571d940a9294e7d0ea1e2
+function c() {
+  local name=$(git branch --show-current)
+
+  if [[ "$name" == "main" ]]; then
+    claude
+    return
+  fi
+
+  local encoded=$(pwd | sed 's|/|-|g')
+  local sessions_dir="$HOME/.claude/projects/$encoded"
+  local found=false
+
+  for jsonl in "$sessions_dir"/*.jsonl; do
+    local last_title=$(grep '"type":"custom-title"' "$jsonl" | tail -1 | jq -r '.customTitle')
+    if [[ "$last_title" == "$name" ]]; then
+      found=true
+      break
+    fi
+  done
+
+  if $found; then
+    claude --resume "$name"
+  else
+    claude "/rename $name"
+  fi
+}
