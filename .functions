@@ -1,7 +1,7 @@
 # Wrapper function to launch Claude and either create a new session for the branch
 # or resume a past session based on the branch name
 #
-# From https://gist.github.com/rcscott/e6e9005f39e571d940a9294e7d0ea1e2
+# Originally from https://gist.github.com/rcscott/e6e9005f39e571d940a9294e7d0ea1e2
 function c() {
   local name=$(git branch --show-current)
 
@@ -10,7 +10,7 @@ function c() {
     return
   fi
 
-  local encoded=$(pwd | sed 's|/|-|g')
+  local encoded=$(pwd | sed 's|[^a-zA-Z0-9]|-|g')
   local sessions_dir="$HOME/.claude/projects/$encoded"
   local found=false
 
