@@ -72,6 +72,8 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git python mercurial pip pyenv extract node npm zsh-syntax-highlighting bgnotify yarn)
+plugins=(git python mercurial pip pyenv extract node npm bgnotify yarn)
+
+source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 source $ZSH/oh-my-zsh.sh
