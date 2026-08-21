@@ -72,3 +72,6 @@
 	enabled = true
 [help]
 	autocorrect = prompt
+[include]
+	# Include a local configuration, this gets ignored if the file doesn't exist.
+	path = .gitconfig.local
