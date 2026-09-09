@@ -23,6 +23,9 @@ export CCACHE_COMPRESS=""
 # Configure tools to use light terminals.
 BAT_THEME=GitHub
 
+# pipx and other tools get installed here.
+export PATH="$HOME/.local/bin:$PATH"
+
 # pyenv (must be initialized before .zshrc).
 export PYENV_ROOT="$HOME/.pyenv"
 if [ -s "$PYENV_ROOT" ]; then
@@ -39,11 +42,6 @@ export NVM_DIR="$HOME/.nvm"
 # Cargo
 [ -s "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
-# LM Studio CLI
-if [ -s "$HOME/.lmstudio" ]; then
-  export PATH="$PATH:$HOME/.lmstudio/bin"
-fi
-
 # .NET Core SDK tools
 if [ -s "$HOME/.dotnet/tools" ]; then
   export PATH="$PATH:$HOME/.dotnet/tools"
@@ -56,4 +54,40 @@ if [ -s "$HOME/perl5" ]; then
   export PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
   export PERL_MB_OPT="--install_base \"$HOME/perl5\""
   export PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"
+fi
+
+# LM Studio CLI
+if [ -s "$HOME/.lmstudio" ]; then
+  export PATH="$PATH:$HOME/.lmstudio/bin"
+fi
+
+# OpenCode
+if [ -s "$HOME/config/.opencode" ]; then
+  #compdef opencode
+  ###-begin-opencode-completions-###
+  #
+  # yargs command completion script
+  #
+  # Installation: opencode completion >> ~/.zshrc
+  #    or opencode completion >> ~/.zprofile on OSX.
+  #
+  _opencode_yargs_completions()
+  {
+    local reply
+    local si=$IFS
+    IFS=$'
+  ' reply=($(COMP_CWORD="$((CURRENT-1))" COMP_LINE="$BUFFER" COMP_POINT="$CURSOR" opencode --get-yargs-completions "${words[@]}"))
+    IFS=$si
+    if [[ ${#reply} -gt 0 ]]; then
+      _describe 'values' reply
+    else
+      _default
+    fi
+  }
+  if [[ "'${zsh_eval_context[-1]}" == "loadautofunc" ]]; then
+    _opencode_yargs_completions "$@"
+  else
+    compdef _opencode_yargs_completions opencode
+  fi
+  ###-end-opencode-completions-###
 fi
