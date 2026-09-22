@@ -14,7 +14,7 @@ function c() {
   local sessions_dir="$HOME/.claude/projects/$encoded"
   local found=false
 
-  if [ -f "$sessions_dir" ]; then
+  if [ -d "$sessions_dir" ]; then
     for jsonl in "$sessions_dir"/*.jsonl; do
       local last_title=$(grep '"type":"custom-title"' "$jsonl" | tail -1 | jq -r '.customTitle')
       if [[ "$last_title" == "$name" ]]; then
@@ -36,7 +36,7 @@ function claude-sessions() {
   local encoded=$(pwd | sed 's|[^a-zA-Z0-9]|-|g')
   local sessions_dir="$HOME/.claude/projects/$encoded"
 
-  if [ -f "$sessions_dir" ]; then
+  if [ -d "$sessions_dir" ]; then
     for jsonl in "$sessions_dir"/*.jsonl; do
       local title=$(grep '"type":"custom-title"' "$jsonl" | tail -1 | jq -r '.customTitle')
       if [[ "$title" != "" ]]; then
