@@ -10,9 +10,9 @@ Write as Patrick Cloke for three registers: design documents, PR descriptions, a
 posts. General writing quality (concrete over vague, explain the why, progressive
 disclosure) is already covered by the global CLAUDE.md writing rules; don't restate those
 here, just apply them. This skill covers the register-specific layer on top: design docs
-and PRs are template-shaped, so that layer is about the judgment calls that fill the
-template; blog posts have no template, so that layer is about narrative shape and how
-much personality shows.
+and PRs are already template-shaped at work, so that layer is about the judgment
+calls that fill the template; blog posts have no template, so that layer is about narrative
+shape and how much personality shows.
 
 **Pick the register from context first** — the three are deliberately different, and the
 biggest failure mode is bleeding one into another (see Corrections).
@@ -30,11 +30,11 @@ with a person visibly narrating it than to a personal essay.
 Concrete numbers appear here just as much as in the work registers — "I currently watch 321
 repositories," "took only a few hours... less than $5" — this habit is register-independent.
 
-**Relationship to reader**: Assumed competence, scaled to context. Team jargon (constants, MSC,
-HLD, technical terms related to brokers, ticket IDs) goes unexplained in work docs; for blog posts
+**Relationship to reader**: Assumed competence, scaled to context. Team jargon (acronyms,
+internal system names, ticket IDs) goes unexplained in work docs; for blog posts
 aimed at a technical-but-general audience, unfamiliar terms and libraries get a link on
 first use instead of an inline definition (e.g. linking `broker`, `workers`, `backend` to
-external docs rather than explaining them from scratch).
+Celery's own docs rather than explaining them from scratch).
 
 **Opinion**: Not falsely balanced, in any register. When Patrick has a recommendation, he
 says so directly, sometimes in first person — "I would like to challenge the idea that
@@ -43,6 +43,12 @@ weighted. In blog posts this shows up as plain admissions of the edges of his kn
 instead of false authority: "I attempt to break it down to the best of my understanding
 below," "I haven't used any of the above projects (and can't vouch for them)."
 
+Strong opinions, loosely held: a direct recommendation isn't the same as a fixed one. In
+design docs, name what would change the recommendation — a stated assumption, an open
+question, a piece of missing data — rather than presenting it as settled. This is what
+"Transparent placeholders" and the Alternatives section are already doing structurally;
+say it in the prose too when the recommendation itself is conditional on something unknown.
+
 ## Structural Signatures — Design Docs
 
 **Status/TL;DR up front.** HLDs open with a bolded status line (`**Status: Ready for
@@ -50,13 +56,13 @@ Feedback**`); policy docs open with `## TL;DR`. Pick whichever matches the doc t
 always orient the reader in the first line before any detail.
 
 **Problem statement before solution.** State what's broken or needed, with the compounding
-reasons it matters, before proposing anything. From the messaging-conventions policy: three
-bulleted problems (no ordering guarantees, inconsistent retention, consumer coupling) come
-before any proposed catalog.
+reasons it matters, before proposing anything. In a policy doc, three bulleted problems (no
+ordering guarantees, inconsistent retention, consumer coupling) come before any proposed
+catalog.
 
 **A named set of design principles drives the decisions, stated once, referenced repeatedly.**
-The topic-catalog doc states principles once ("SLA/dispatch criticality," "raw/processed
-separation," "correctness boundary") and every subsequent topic's rationale cites one of them
+A catalog-style doc states principles once ("raw/processed separation," "correctness
+boundary") and every subsequent entry's rationale cites one of them
 by name, instead of re-deriving the reasoning each time.
 
 **Rationale attached to every decision**, often as its own labeled table column
@@ -84,18 +90,20 @@ section is finished — don't backfill placeholder content just to look done.
 `~60–70ms` cross-region latency. Never "low volume" or "some latency" alone.
 
 **Normative keywords for policy content.** When writing prescriptive/policy material (not a
-one-off design), use bolded RFC-2119 style keywords: Foo **SHOULD** be used, consumers
-**MUST** be idempotent. Scope the policy explicitly: state what it does and doesn't mandate
+one-off design), use bolded RFC-2119 style keywords: new services **SHOULD** use the shared
+event bus, consumers **MUST** be idempotent. Scope the policy explicitly: state what it does and doesn't mandate
 ("This policy is about aligning direction going forward. It is not a mandate to rewrite
 existing services.").
 
 **Closing conventions vary by doc type**: HLDs end with a Sign-Offs table (owner per team,
 placeholder-friendly); exploratory research docs end with a Verification Checklist (concrete
-steps to prove the design works); policy docs end with a named Contact section for open questions.
+steps to prove the design works, e.g. "Take the primary region offline; confirm standby
+consumers activate... within < 5 minutes"); policy docs end with a named Contact section for
+open questions.
 
 **Self-review pass before sharing.** Formalize, then read back for loose ends and clarity
-before asking for feedback — stated explicitly in Patrick's own description of his MSC
-process, and visible in PRs as "Additional correctness/cleanup fixes found during
+before asking for feedback — stated explicitly in Patrick's own description of his
+proposal process, and visible in PRs as "Additional correctness/cleanup fixes found during
 self-review."
 
 ## Structural Signatures — PR Descriptions
@@ -103,22 +111,36 @@ self-review."
 The `pr` skill owns template mechanics (which headers to keep, per-repo CAB handling) —
 this section is about what goes inside those sections.
 
-**Ticket line early, then why before what.** `Ticket: ISSUE-1905.` near the top, then a
-short paragraph on why the change is needed before the bullet list of what changed. Bullets
-are specific and technical ("Adds handling of a new event to process foobar"), not vague
-summaries.
+**Ticket line early, then why before what — only when a real ticket exists.**
+`Ticket: ABC-1234.` near the top, then a short paragraph on why the change is needed before
+the bullet list of what changed. Bullets are specific and technical ("Adds which cluster an
+event is from to logging/metrics/traces"), not vague summaries. When there's no real ticket,
+skip the ticket line and any ticket prefix entirely — don't write a placeholder like
+`Ticket: ABC-0000 (no ticket).`
+
+**Trivial fixes get a couple of short paragraphs, not a full write-up.** For a small,
+self-contained change (a dependency cleanup, a one-file fix), state the fact and the
+one-line why, then stop — don't separately re-explain the underlying mechanism and then
+restate what the diff already shows. If the reader can see it in the diff, it doesn't need
+a sentence in the body too.
+
+**Same-repo issues and PRs get a bare reference.** Write `#26`, not
+`[#26](https://github.com/.../issues/26)` — GitHub auto-links it, and the full markdown link
+is noise.
 
 **Blast radius is stated explicitly, every time.** Every PR names what's actually at risk and
-what isn't: "gated behind a feature flag, disabled in production." Never leave risk unstated.
+what isn't: "gated behind `Feature.NewClient=true`, not the production path, so blast radius is
+limited to the comparison topic." Never leave risk unstated.
 
 **Failure Analysis follows a three-part shape**: mechanism (what would break) → customer-
 visible consequence → mitigation already in place. "If message publishing... silently broke,
-sensor events, alarms, and login/state changes would stop reaching downstream consumers...
-customer-visible as missed alarms/notifications. Mitigated by the type conversion itself..."
+order events, payments, and login/state changes would stop reaching downstream consumers...
+customer-visible as missed confirmations/notifications. Mitigated by the type conversion itself..."
 
 **Known limitations get named and accepted, not hidden.** "Known and accepted for this
-short-lived comparison branch. Say what wasn't done, too: "no separate manual QA verification
-was done beyond the automated test suite."
+short-lived comparison branch: `Topic` and `SchemaFormat` aren't validated against each
+other..." Say what wasn't done, too: "no separate manual QA verification was done in this
+session beyond the automated suite above."
 
 **A bug found outside the PR's scope gets flagged and deferred, never fixed inline.** When
 self-review turns up a real but unrelated issue, name it, say why it's out of scope, and
@@ -127,7 +149,8 @@ branch. Left as-is with a `@ts-expect-error` and a comment explaining it; will f
 follow-up ticket..." This is a hard rule (see CLAUDE.md), not just a style preference.
 
 **Rollout monitoring names specific metrics/logs, not "we'll keep an eye on it."** Concrete
-identifiers only specific Grafana/Honeycomb dashboards.
+identifiers only: `producer_connection_time`, `request_error_count`,
+specific Grafana/Honeycomb dashboards.
 
 ## Structural Signatures — Blog Posts
 
@@ -191,8 +214,9 @@ apologizing for it.
 </pattern>
 
 <pattern name="over-explaining team jargon">
-Defining MSC, HLD, or specific technical terms for an engineering audience is the wrong
-register. Reserve explanation for the one unfamiliar thing the doc is actually introducing.
+Defining team acronyms, internal system names, or standard terms for an engineering
+audience is the wrong register. Reserve explanation for the one unfamiliar thing the doc is actually
+introducing.
 </pattern>
 
 <pattern name="blog personality bleeding into work docs">
@@ -209,6 +233,15 @@ Name it, explain why it's out of scope, propose a follow-up ticket, move on.
 Writing a running bit or a joke-per-paragraph overshoots Patrick's actual blog voice. His
 humor is real but sparse — often just one dry parenthetical or a single strikethrough gag
 in an entire post, never a comedic riff.
+</pattern>
+
+<pattern name="over-explaining a simple fix, or fabricating a ticket line">
+For a small, self-contained PR (dependency cleanup, one-file fix), don't restate both the
+underlying mechanism ("why this package is deprecated...") and the diff contents
+("...so I removed X, Y, Z") as separate paragraphs — one short paragraph covering the fact
+and the one-line why is enough. Also don't invent a ticket line when there's no real ticket
+(e.g. `Ticket: ABC-0000 (no ticket).`) — the dummy prefix is for branch/commit naming only
+and should never appear in a PR title or body.
 </pattern>
 
 <pattern name="advice-column framing in the wrong post type">
