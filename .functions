@@ -45,3 +45,24 @@ function claude-sessions() {
     done
   fi
 }
+
+# Wrapper function to launch OpenCode and either create a new session for the branch
+# or resume a past session based on the branch name
+function oc() {
+  local name=$(git branch --show-current)
+
+  if [[ "$name" == "main" ]]; then
+    opencode
+    return
+  fi
+
+  session_id=$(opencode session list --format json | jq -r --arg name "$name" '[.[] | select(.title == $name)][0]  | .id')
+
+  if [ -n "$session_id" ]; then
+    echo "REUSING $session_id"
+    opencode --session "$session_id"
+  else
+    echo "NEW SESSION $name"
+    opencode --prompt "/session_rename $name"
+  fi
+}
