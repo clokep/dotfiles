@@ -13,4 +13,6 @@ To bootstrap a new computer, some rough steps:
 11. Apply macOS customizations: `source .osx`
 12. [Install rust](https://rust-lang.org/tools/install/): `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
 
-Put any local overrides in a `.extra` file
+Put any local overrides in a `.extra` file.
+
+Put any local git overrides in a `.gitconfig.local` file.
