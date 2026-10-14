@@ -1,4 +1,71 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugins": ["superpowers@git+https://github.com/obra/superpowers.git"]
+  "plugins": ["superpowers@git+https://github.com/obra/superpowers.git"],
+
+  // Format files after write/edit/patch using detected project formatters.
+  "formatter": true,
+
+  // Don't flag build/test output as filesystem changes.
+  "watcher": {
+    "ignore": ["dist/**", "build/**", "coverage/**"]
+  },
+
+  // Ask before any shell command, then allow the read-only commands below.
+  // Last matching rule wins: broad `ask` first, then allows, then hard denies.
+  "permissions": [
+    { "action": "shell", "resource": "*", "effect": "ask" },
+
+    // read-only navigation & search
+    { "action": "shell", "resource": "ls *",    "effect": "allow" },
+    { "action": "shell", "resource": "cat *",   "effect": "allow" },
+    { "action": "shell", "resource": "head *",  "effect": "allow" },
+    { "action": "shell", "resource": "tail *",  "effect": "allow" },
+    { "action": "shell", "resource": "wc *",    "effect": "allow" },
+    { "action": "shell", "resource": "pwd",     "effect": "allow" },
+    { "action": "shell", "resource": "file *",  "effect": "allow" },
+    { "action": "shell", "resource": "stat *",  "effect": "allow" },
+    { "action": "shell", "resource": "tree *",  "effect": "allow" },
+    { "action": "shell", "resource": "du *",    "effect": "allow" },
+    { "action": "shell", "resource": "df *",    "effect": "allow" },
+    { "action": "shell", "resource": "which *", "effect": "allow" },
+    { "action": "shell", "resource": "whoami",  "effect": "allow" },
+    { "action": "shell", "resource": "echo *",  "effect": "allow" },
+    { "action": "shell", "resource": "grep *",  "effect": "allow" },
+    { "action": "shell", "resource": "rg *",    "effect": "allow" },
+    { "action": "shell", "resource": "jq *",    "effect": "allow" },
+
+    // read-only git
+    { "action": "shell", "resource": "git diff *",      "effect": "allow" },
+    { "action": "shell", "resource": "git log *",       "effect": "allow" },
+    { "action": "shell", "resource": "git show *",      "effect": "allow" },
+    { "action": "shell", "resource": "git status *",    "effect": "allow" },
+    { "action": "shell", "resource": "git rev-parse *", "effect": "allow" },
+    { "action": "shell", "resource": "git blame *",     "effect": "allow" },
+    { "action": "shell", "resource": "git describe *",  "effect": "allow" },
+
+    // build & test (no `run`/`exec` — those prompt)
+    { "action": "shell", "resource": "pytest *",           "effect": "allow" },
+    { "action": "shell", "resource": "python -m pytest *", "effect": "allow" },
+    { "action": "shell", "resource": "mypy *",             "effect": "allow" },
+    { "action": "shell", "resource": "dotnet build *",     "effect": "allow" },
+    { "action": "shell", "resource": "dotnet test *",      "effect": "allow" },
+    { "action": "shell", "resource": "npm ci",             "effect": "allow" },
+
+    // read-only gh
+    { "action": "shell", "resource": "gh issue list *",   "effect": "allow" },
+    { "action": "shell", "resource": "gh issue status *", "effect": "allow" },
+    { "action": "shell", "resource": "gh issue view *",   "effect": "allow" },
+    { "action": "shell", "resource": "gh pr list *",   "effect": "allow" },
+    { "action": "shell", "resource": "gh pr status *", "effect": "allow" },
+    { "action": "shell", "resource": "gh pr checks *", "effect": "allow" },
+    { "action": "shell", "resource": "gh pr diff *",   "effect": "allow" },
+    { "action": "shell", "resource": "gh pr view *",   "effect": "allow" },
+
+    // hard denies — last match wins, so these override everything above
+    { "action": "shell", "resource": "sudo *",             "effect": "deny" },
+    { "action": "shell", "resource": "rm -rf *",           "effect": "deny" },
+    { "action": "shell", "resource": "rm -fr *",           "effect": "deny" },
+    { "action": "shell", "resource": "git push --force *", "effect": "deny" },
+    { "action": "shell", "resource": "git push -f *",      "effect": "deny" }
+  ]
 }
