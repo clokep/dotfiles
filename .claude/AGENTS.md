@@ -2,6 +2,10 @@
 
 - Project docs document what _is_, not the journey — cut "we tried X", "empirically observed",
   PR/SHA/ticket references, and first-person anecdotes.
+- Code comments describe the code as it is now and why it is that way. Never compare to a previous
+  state ("unlike the old config", "no longer", "now also", "replaces X"); that belongs in the commit
+  message or PR body, not the code. Before writing a comment, check it still makes sense to a reader
+  who has never seen the old code.
 - Default to including a diagram whenever it clarifies a flow, sequence, state machine,
   architecture, or data shape, not only when asked. ASCII diagrams on the terminal, Mermaid in docs.
 - Use the AskUserQuestion tool whenever you have questions for me, instead of presenting me with
@@ -96,14 +100,20 @@ These are steps to follow whenever we're building new features, fixing bugs, etc
 * Always use `git mv` when renaming files to ensure renames are properly captured.
 * It is OK to use worktrees, but we do not always need them. You MUST clean-up after yourself and notify
   before using a worktree.
+* Create worktrees under `.worktrees/` in the repo root (e.g. `.worktrees/DCTRL-1234-name`), never in
+  `/tmp`, the scratchpad, or a sibling directory. If `.worktrees/` isn't gitignored, tell me.
 
 # Writing Commits As Me
 
 * Use atomic commits — one logical, self-contained change per commit, project checks all pass.
 * When creating PRs, check the repo's merge strategy / recent PR shapes to match the style. For
   squash merges, assume that the PR body is the merge commit's body, so write it accordingly.
-* Verification content like test plans, screenshots, etc. goes in a PR comment.
+* Do NOT add a PR comment by default. Most PRs need none: CI runs the tests and the diff shows the
+  change. Only when there is verification a reviewer can't get from the diff or CI (manual testing,
+  screenshots, a deployed check), put it in a PR comment, never in the PR body.
 * Never use convention commits.
+* Never list changes file by file in a commit message or PR body. The diff shows what changed; say
+  why, and keep it short.
 
 # Local overrides
 
