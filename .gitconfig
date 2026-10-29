@@ -22,42 +22,41 @@
 # Commit even if pre-commit hooks fail.
 	reallycommit = commit --no-verify
 # Amend with the same commit message.
-	fixup = commit --amend -C HEAD
-	reallyfixup = commit --no-verify --amend -C HEAD
+	fixup = commit --amend --no-edit
+	reallyfixup = commit --no-verify --amend --no-edit
 # Push even if pre-push hooks fail.
 	reallypush = push --no-verify
 # Print out aliases
-	alias = config --get-regexp alias
+	alias = config --get-regexp '^alias\\.'
 # Print like hg rollback
 	rollback = reset --soft HEAD^
 	committers = shortlog -sne
 # Import like hg import
 	import = apply --reject
-# Show a diff of only (real?) modified files
-	modified = diff --diff-filter=MUB --ignore-space-at-eol --ignore-space-change --ignore-all-space
-	mstaged = diff --cached --diff-filter=MUB
-# cd back to the root of this git repository.
-	root = !cd "`git rev-parse --show-cdup`" && pwd
-	git = !sh -c 'git $0'
+# Show a diff of edits to existing files (no adds, deletes or renames), ignoring whitespace.
+	modified = diff -w --diff-filter=MUB
+	mstaged = diff -w --cached --diff-filter=MUB
+# Print the root of this git repository.
+	root = rev-parse --show-toplevel
+# Run git through git, so a stray leading `git` still works.
+	git = !git
 	mylog = log --author='Patrick Cloke'
-# Delete unused remote branches and their local copies.
-	trim = !sh -c "git remote prune $1 && git branch -r | cut -d ' ' -f 3 | egrep -v -f /dev/fd/0 <(git branch -vv | grep $1) | cut -d ' ' -f 3 | xargs git branch -d"
-# Delete branches merged into the current branch
+# Delete local branches whose upstream branch is gone, even if they are unmerged.
 	localprune = !git for-each-ref --format '%(refname:short) %(upstream:track)' refs/heads | awk '$2 == \"[gone]\" {print $1}' | xargs git branch --delete --force
 
 # Some things I always try to type...
 	branches = branch -l
 	tags = tag -l
-# Squash all commits down to a single commit.
-    squash = "!f(){ CUR=`git rev-parse HEAD` && git reset --soft ${1} && git commit -m \"$(git log --format=%B ${1}..${CUR})\"; };f && git commit --amend"
-# Find the oldest ancestor of the current branch shared with main.
-# See http://stackoverflow.com/questions/1527234/finding-a-branch-point-with-git
-	oldest-ancestor = !zsh -c 'diff -u <(git rev-list --first-parent "${1:-main}") <(git rev-list --first-parent "${2:-HEAD}") | sed -ne \"s/^ //p\" | head -1' -
-	branchdiff = !sh -c \"git diff `git oldest-ancestor`..HEAD $@\"
-	branchlog = !sh -c \"git log `git oldest-ancestor`..HEAD $@\"
-	branchbase = !sh -c \"git rebase -i `git oldest-ancestor`\"
+# Squash the commits since the merge-base with a branch or commit (default main) into one,
+# then edit the combined message.
+	squash = "!f() { base=$(git merge-base \"${1:-main}\" HEAD) && msg=$(git log --reverse --format=%B \"$base\"..HEAD) && git reset --soft \"$base\" && git commit -e -m \"$msg\"; }; f"
+# Diff, log and interactively rebase the commits on this branch since it left main.
+# For a branch stacked on another branch, run git diff <parent>...HEAD directly.
+	branchdiff = diff main...HEAD
+	branchlog = log main..HEAD
+	branchbase = !git rebase -i $(git merge-base main HEAD)
 # Bisect the current branch using a command.
-	branchsect = "!f() { git bisect start HEAD `git oldest-ancestor`; git bisect run \"$@\"; }; f"
+	branchsect = "!f() { git bisect start HEAD \"$(git merge-base main HEAD)\"; git bisect run \"$@\"; }; f"
 # Make a commit with a hard-coded message.
 	news = commit -m Newsfragment
 [push]
