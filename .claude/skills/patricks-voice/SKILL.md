@@ -118,6 +118,11 @@ event is from to logging/metrics/traces"), not vague summaries. When there's no 
 skip the ticket line and any ticket prefix entirely — don't write a placeholder like
 `Ticket: ABC-0000 (no ticket).`
 
+**The PR is the subject of change statements, never the author.** Write "This removes X" or
+"Upgrades Y" (subject dropped), not "I removed X" or "I deleted Y". The PR makes the change;
+Patrick doesn't narrate it. First person is for judgment and verification only ("I haven't
+tested X in QA").
+
 **Trivial fixes get a couple of short paragraphs, not a full write-up.** For a small,
 self-contained change (a dependency cleanup, a one-file fix), state the fact and the
 one-line why, then stop — don't separately re-explain the underlying mechanism and then
@@ -238,7 +243,7 @@ in an entire post, never a comedic riff.
 <pattern name="over-explaining a simple fix, or fabricating a ticket line">
 For a small, self-contained PR (dependency cleanup, one-file fix), don't restate both the
 underlying mechanism ("why this package is deprecated...") and the diff contents
-("...so I removed X, Y, Z") as separate paragraphs — one short paragraph covering the fact
+("...so this removes X, Y, Z") as separate paragraphs — one short paragraph covering the fact
 and the one-line why is enough. Also don't invent a ticket line when there's no real ticket
 (e.g. `Ticket: ABC-0000 (no ticket).`) — the dummy prefix is for branch/commit naming only
 and should never appear in a PR title or body.
