@@ -100,8 +100,9 @@ These are steps to follow whenever we're building new features, fixing bugs, etc
 * Always use `git mv` when renaming files to ensure renames are properly captured.
 * Always set the upstream branch when pushing (`git push -u origin <branch>`), so later `git push`
   and `git pull` work without arguments.
-* It is OK to use worktrees, but we do not always need them. You MUST clean-up after yourself and notify
-  before using a worktree.
+* It is OK to use worktrees, but we do not always need them. Notify me before creating one. Keep it
+  for the whole task and reuse it across commands. Remove it only once the task is finished (branch
+  pushed or handed back to me), not after each command.
 * Create worktrees under `.worktrees/` in the repo root (e.g. `.worktrees/DCTRL-1234-name`), never in
   `/tmp`, the scratchpad, or a sibling directory. If `.worktrees/` isn't gitignored, tell me.
 
