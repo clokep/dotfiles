@@ -59,6 +59,10 @@
 	branchsect = "!f() { git bisect start HEAD \"$(git merge-base main HEAD)\"; git bisect run \"$@\"; }; f"
 # Make a commit with a hard-coded message.
 	news = commit -m Newsfragment
+# Check signatures on a range of commits, e.g. `git verify-commits main..HEAD`.
+	verify-commits = "!f() { rc=0; for c in $(git rev-list --reverse \"$@\"); do if git verify-commit \"$c\" >/dev/null 2>&1; then s=verified; else s='NOT VERIFIED'; rc=1; fi; echo \"$(git log -1 --format='%h %s' \"$c\") [$s]\"; done; return $rc; }; f"
+# Check signatures on the commits on this branch since it left main.
+	branchverify = verify-commits main..HEAD
 [push]
 	default = simple
 [log]
