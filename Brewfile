@@ -7,3 +7,8 @@ brew "pipx"
 brew "hg"
 brew "golang"
 brew "shellcheck"
+
+# JavaScript related
+brew "node"
+brew "yarn"
+brew "pnpm"
