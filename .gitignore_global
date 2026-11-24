@@ -1,0 +1,5 @@
+# Git worktrees
+.worktrees/
+
+# Editor files
+.idea/

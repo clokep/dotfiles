@@ -1,6 +1,7 @@
 [core]
 	autocrlf = false
 	ignorecase = true
+	excludesFile = ~/.gitignore_global
 [user]
 	name = Patrick Cloke
 	email = clokep@patrick.cloke.us
