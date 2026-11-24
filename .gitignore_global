@@ -3,3 +3,6 @@
 
 # Editor files
 .idea/
+
+# macOS garbage
+.DS_Store
